@@ -1,21 +1,21 @@
-package service;
+package ru.practicum.explorewithme.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import dto.StatisticInDto;
-import dto.StatisticViewDto;
-import exception.StatisticValidationException;
-import model.StatisticMapper;
-import repository.StatisticRepository;
+import ru.practicum.explorewithme.StatisticInDto;
+import ru.practicum.explorewithme.StatisticViewDto;
+import ru.practicum.explorewithme.exception.StatisticValidationException;
+import ru.practicum.explorewithme.model.StatisticMapper;
+import ru.practicum.explorewithme.repository.StatisticRepository;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
-import static constant.Constant.TIME_FORMAT;
+import static ru.practicum.explorewithme.constant.Constant.TIME_FORMAT;
 
 @Slf4j
 @Service

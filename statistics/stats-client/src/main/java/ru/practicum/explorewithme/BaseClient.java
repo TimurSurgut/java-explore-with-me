@@ -1,4 +1,4 @@
-package client;
+package ru.practicum.explorewithme;
 
 import org.springframework.http.*;
 import org.springframework.lang.Nullable;

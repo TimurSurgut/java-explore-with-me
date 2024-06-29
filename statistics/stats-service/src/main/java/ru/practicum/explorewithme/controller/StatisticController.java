@@ -1,12 +1,12 @@
-package controller;
+package ru.practicum.explorewithme.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import dto.StatisticInDto;
-import dto.StatisticViewDto;
-import service.StatisticService;
+import ru.practicum.explorewithme.StatisticInDto;
+import ru.practicum.explorewithme.StatisticViewDto;
+import ru.practicum.explorewithme.service.StatisticService;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;

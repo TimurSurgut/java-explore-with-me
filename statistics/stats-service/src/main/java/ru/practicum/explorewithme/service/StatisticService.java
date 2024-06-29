@@ -1,7 +1,7 @@
-package service;
+package ru.practicum.explorewithme.service;
 
-import dto.StatisticInDto;
-import dto.StatisticViewDto;
+import ru.practicum.explorewithme.StatisticInDto;
+import ru.practicum.explorewithme.StatisticViewDto;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
-package client;
+package ru.practicum.explorewithme;
 
-import dto.StatisticInDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;

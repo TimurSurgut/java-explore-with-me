@@ -1,4 +1,4 @@
-package dto;
+package ru.practicum.explorewithme;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

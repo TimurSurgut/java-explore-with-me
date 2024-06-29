@@ -1,4 +1,4 @@
-package model;
+package ru.practicum.explorewithme.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

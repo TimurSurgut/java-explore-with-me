@@ -1,4 +1,4 @@
-package exception;
+package ru.practicum.explorewithme.exception;
 
 public class StatisticValidationException extends RuntimeException {
 

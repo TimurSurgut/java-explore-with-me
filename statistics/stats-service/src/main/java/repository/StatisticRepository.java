@@ -1,10 +1,10 @@
-package ru.practicum.explorewithme.repository;
+package repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.practicum.explorewithme.StatisticViewDto;
-import ru.practicum.explorewithme.model.Statistic;
+import dto.StatisticViewDto;
+import model.Statistic;
 
 import java.time.LocalDateTime;
 import java.util.List;

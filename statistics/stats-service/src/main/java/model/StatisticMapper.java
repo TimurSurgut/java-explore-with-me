@@ -1,6 +1,6 @@
-package ru.practicum.explorewithme.model;
+package model;
 
-import ru.practicum.explorewithme.StatisticInDto;
+import dto.StatisticInDto;
 
 public class StatisticMapper {
 

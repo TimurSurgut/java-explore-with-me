@@ -16,7 +16,7 @@
 		<module>ewm-service</module>
 	</modules>
 
-	<groupId>Timur</groupId>
+	<groupId>ru.practicum</groupId>
 	<artifactId>explore-with-me</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -64,8 +64,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.30</version>
-			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
@@ -111,7 +110,7 @@
 							<phase>compile</phase>
 						</execution>
 					</executions>
-									</plugin>
+					</plugin>
 				<plugin>
 					<groupId>com.github.spotbugs</groupId>
 					<artifactId>spotbugs-maven-plugin</artifactId>
@@ -199,6 +198,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-
-</project>
+	</project>

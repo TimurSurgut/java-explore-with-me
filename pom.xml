@@ -64,7 +64,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>1.18.30</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -110,8 +111,7 @@
 							<phase>compile</phase>
 						</execution>
 					</executions>
-
-				</plugin>
+									</plugin>
 				<plugin>
 					<groupId>com.github.spotbugs</groupId>
 					<artifactId>spotbugs-maven-plugin</artifactId>
@@ -199,4 +199,6 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	</project>
+
+
+</project>

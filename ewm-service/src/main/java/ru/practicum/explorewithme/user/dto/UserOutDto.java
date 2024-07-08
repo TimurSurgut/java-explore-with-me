@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserOutDto {
 
-     Long id;
-     String email;
-     String name;
+    Long id;
+    String email;
+    String name;
 }

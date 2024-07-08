@@ -13,20 +13,20 @@ import ru.practicum.explorewithme.user.dto.UserShortDto;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventFullDto {
 
-     String annotation;
-     CategoryDto category;
-     Integer confirmedRequests;
-     String createdOn;
-     String description;
-     String eventDate;
-     Long id;
-     UserShortDto initiator;
-     Location location;
-     Boolean paid;
-     Integer participantLimit;
-     String publishedOn;
-     Boolean requestModeration;
-     String state;
-     String title;
-     Long views;
+    String annotation;
+    CategoryDto category;
+    Integer confirmedRequests;
+    String createdOn;
+    String description;
+    String eventDate;
+    Long id;
+    UserShortDto initiator;
+    Location location;
+    Boolean paid;
+    Integer participantLimit;
+    String publishedOn;
+    Boolean requestModeration;
+    String state;
+    String title;
+    Long views;
 }

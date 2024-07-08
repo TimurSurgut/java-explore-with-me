@@ -13,13 +13,13 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventUserParam {
 
-     String text;
-     List<Long> categories;
-     Boolean paid;
-     LocalDateTime rangeStart;
-     LocalDateTime rangeEnd;
-     Boolean onlyAvailable;
-     String sort;
-     Integer from;
-     Integer size;
+    String text;
+    List<Long> categories;
+    Boolean paid;
+    LocalDateTime rangeStart;
+    LocalDateTime rangeEnd;
+    Boolean onlyAvailable;
+    String sort;
+    Integer from;
+    Integer size;
 }

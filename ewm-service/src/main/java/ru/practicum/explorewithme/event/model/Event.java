@@ -21,38 +21,38 @@ public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long id;
-     String annotation;
+    Long id;
+    String annotation;
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(name = "category_id", nullable = false)
-     Category category;
+    Category category;
     @Column(name = "created_on")
-     LocalDateTime createdOn;
-     String description;
+    LocalDateTime createdOn;
+    String description;
     @Column(name = "event_date")
-     LocalDateTime eventDate;
+    LocalDateTime eventDate;
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(name = "initiator_id", nullable = false)
-     User initiator;
+    User initiator;
     @Column(name = "is_paid")
-     Boolean isPaid;
-     String title;
+    Boolean isPaid;
+    String title;
     @Column(name = "loc_lat")
-     Float lat;
+    Float lat;
     @Column(name = "loc_lon")
-     Float lon;
+    Float lon;
     @Column(name = "participant_limit")
-     Integer participantLimit;
+    Integer participantLimit;
     @Column(name = "request_moderation")
-     Boolean requestModeration;
+    Boolean requestModeration;
     @Column(name = "published_on")
-     LocalDateTime publishedOn;
+    LocalDateTime publishedOn;
     @Enumerated(value = EnumType.STRING)
-     EventState state;
+    EventState state;
     @Column(name = "confirmed_requests")
-     Integer confirmedRequests;
+    Integer confirmedRequests;
     @ManyToMany(mappedBy = "events")
-     List<Compilation> compilations;
+    List<Compilation> compilations;
 }

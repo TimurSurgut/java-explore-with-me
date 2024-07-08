@@ -12,13 +12,13 @@ import ru.practicum.explorewithme.user.dto.UserShortDto;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class EventShortDto {
 
-     String annotation;
-     CategoryDto category;
-     Integer confirmedRequests;
-     String eventDate;
-     Long id;
-     UserShortDto initiator;
-     Boolean paid;
-     String title;
-     Long views;
+    String annotation;
+    CategoryDto category;
+    Integer confirmedRequests;
+    String eventDate;
+    Long id;
+    UserShortDto initiator;
+    Boolean paid;
+    String title;
+    Long views;
 }

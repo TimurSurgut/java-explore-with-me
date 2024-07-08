@@ -19,17 +19,17 @@ public class Request {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long id;
+    Long id;
     @Column(name = "created_at")
-     LocalDateTime createdAt;
+    LocalDateTime createdAt;
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
-     Event event;
+    Event event;
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(name = "requester_id", nullable = false)
-     User requester;
+    User requester;
     @Enumerated(value = EnumType.STRING)
-     RequestStatus status;
+    RequestStatus status;
 }

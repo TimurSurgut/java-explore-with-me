@@ -13,13 +13,13 @@ import javax.validation.constraints.NotNull;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ParticipationRequestDto {
 
-     Long id;
+    Long id;
     @NotBlank
-     String created;
+    String created;
     @NotNull
-     Long event;
+    Long event;
     @NotNull
-     Long requester;
+    Long requester;
     @NotBlank
-     String status;
+    String status;
 }

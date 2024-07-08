@@ -37,13 +37,13 @@ public class CompilationController {
         return compService.addCompilation(compilationDto);
     }
 
-    @PatchMapping(value = path +"{compId}")
+    @PatchMapping(value = path + "{compId}")
     public CompilationDto updateCompilation(@PathVariable Long compId,
                                             @Valid @RequestBody UpdateCompilationRequest updateRequest) {
         return compService.updateCompilation(compId, updateRequest);
     }
 
-    @DeleteMapping(value = path +"{compId}")
+    @DeleteMapping(value = path + "{compId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCompilation(@PathVariable Long compId) {
         compService.deleteCompilation(compId);

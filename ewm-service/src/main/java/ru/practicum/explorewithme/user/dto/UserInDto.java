@@ -17,8 +17,8 @@ public class UserInDto {
     @Email
     @NotBlank
     @Size(min = 6, max = 254, message = "Длина эл. почты должна быть от 6 до 254")
-     String email;
+    String email;
     @NotBlank
     @Size(min = 2, max = 250, message = "Длина имени должна быть от 2 до 250")
-     String name;
+    String name;
 }

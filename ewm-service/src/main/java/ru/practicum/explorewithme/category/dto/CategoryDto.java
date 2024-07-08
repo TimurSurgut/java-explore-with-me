@@ -13,8 +13,8 @@ import javax.validation.constraints.Size;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CategoryDto {
 
-     Long id;
+    Long id;
     @NotBlank
     @Size(min = 1, max = 50, message = "Длина названия категории должна быть от 1 до 50")
-     String name;
+    String name;
 }

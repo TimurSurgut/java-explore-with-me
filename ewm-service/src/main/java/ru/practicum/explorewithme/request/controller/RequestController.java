@@ -29,7 +29,7 @@ public class RequestController {
         return requestService.addRequest(userId, eventId);
     }
 
-    @PatchMapping(value = path+"/{requestId}/cancel")
+    @PatchMapping(value = path + "/{requestId}/cancel")
     public ParticipationRequestDto rejectRequest(@PathVariable Long userId, @PathVariable Long requestId) {
         return requestService.rejectRequest(userId, requestId);
     }

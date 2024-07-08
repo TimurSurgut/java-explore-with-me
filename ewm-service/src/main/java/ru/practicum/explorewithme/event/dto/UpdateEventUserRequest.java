@@ -17,26 +17,26 @@ import javax.validation.constraints.Size;
 public class UpdateEventUserRequest {
 
     @Size(min = 20, max = 2000, message = "Длина аннотации должна быть от 20 до 2000.")
-     String annotation;
+    String annotation;
 
     @Positive
-     Long category;
+    Long category;
 
     @Size(min = 20, max = 7000, message = "Длина полного описания должда быть от 20 до 7000.")
-     String description;
+    String description;
 
-     String eventDate;
+    String eventDate;
 
-     Location location;
+    Location location;
 
-     Boolean paid;
+    Boolean paid;
 
-     Integer participantLimit;
+    Integer participantLimit;
 
-     Boolean requestModeration;
+    Boolean requestModeration;
 
-     String stateAction;
+    String stateAction;
 
     @Size(min = 3, max = 120, message = "Длина заголовка от 3 до 120.")
-     String title;
+    String title;
 }

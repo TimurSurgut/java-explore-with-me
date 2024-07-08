@@ -13,23 +13,23 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class CategoryController {
-
+    private final String path = "admin/categories";
     private final CategoryService categoryService;
 
     //Admin part
-    @PostMapping(value = "admin/categories")
+    @PostMapping(value = path)
     @ResponseStatus(HttpStatus.CREATED)
     public CategoryDto addCategory(@Valid @RequestBody NewCategoryDto categoryDto) {
         return categoryService.addCategory(categoryDto);
     }
 
-    @DeleteMapping(value = "admin/categories/{catId}")
+    @DeleteMapping(value = path + "/{catId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeCategory(@PathVariable Long catId) {
         categoryService.removeCategory(catId);
     }
 
-    @PatchMapping(value = "admin/categories/{catId}")
+    @PatchMapping(value = path + "/{catId}")
     public CategoryDto updateCategory(@PathVariable Long catId,
                                       @Valid @RequestBody CategoryDto categoryDto) {
         return categoryService.updateCategory(catId, categoryDto);

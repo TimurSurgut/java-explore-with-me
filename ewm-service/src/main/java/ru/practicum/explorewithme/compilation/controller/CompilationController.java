@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class CompilationController {
-
+    private final String path = "/admin/compilations";
     private final CompilationService compService;
 
     //Public endpoints
@@ -31,19 +31,19 @@ public class CompilationController {
     }
 
     //Admin endpoints
-    @PostMapping(value = "/admin/compilations")
+    @PostMapping(value = path)
     @ResponseStatus(HttpStatus.CREATED)
     public CompilationDto addCompilation(@Valid @RequestBody NewCompilationDto compilationDto) {
         return compService.addCompilation(compilationDto);
     }
 
-    @PatchMapping(value = "/admin/compilations/{compId}")
+    @PatchMapping(value = path +"{compId}")
     public CompilationDto updateCompilation(@PathVariable Long compId,
                                             @Valid @RequestBody UpdateCompilationRequest updateRequest) {
         return compService.updateCompilation(compId, updateRequest);
     }
 
-    @DeleteMapping(value = "/admin/compilations/{compId}")
+    @DeleteMapping(value = path +"{compId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCompilation(@PathVariable Long compId) {
         compService.deleteCompilation(compId);

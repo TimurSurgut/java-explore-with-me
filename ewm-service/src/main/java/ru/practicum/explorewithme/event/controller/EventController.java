@@ -25,30 +25,30 @@ import static ru.practicum.explorewithme.constant.Constant.TIME_FORMAT;
 @RestController
 @RequiredArgsConstructor
 public class EventController {
-
+    private final String path = "/users/{userId}/events";
     private final EventService eventService;
     private final StatisticClient statisticClient;
 
     //Private endpoints
-    @PostMapping(value = "/users/{userId}/events")
+    @PostMapping(value = path)
     @ResponseStatus(HttpStatus.CREATED)
     public EventFullDto addEvent(@PathVariable Long userId, @Valid @RequestBody NewEventDto newEventDto) {
         return eventService.addEvent(userId, newEventDto);
     }
 
-    @GetMapping("/users/{userId}/events")
+    @GetMapping(path)
     public List<EventShortDto> findEventsOfUser(@PathVariable Long userId,
                                                 @RequestParam(required = false, defaultValue = "0") Integer from,
                                                 @RequestParam(required = false, defaultValue = "10") Integer size) {
         return eventService.findEventsOfUser(userId, from, size);
     }
 
-    @GetMapping("/users/{userId}/events/{eventId}")
+    @GetMapping(path+"/{eventId}")
     public EventFullDto findUserEventById(@PathVariable Long userId, @PathVariable Long eventId) {
         return eventService.findUserEventById(userId, eventId);
     }
 
-    @PatchMapping(value = "/users/{userId}/events/{eventId}")
+    @PatchMapping(value = path+"/{eventId}")
     public EventFullDto userUpdateEvent(@PathVariable Long userId,
                                         @PathVariable Long eventId,
                                         @Valid @RequestBody UpdateEventUserRequest updateEventUserRequest) {
@@ -103,12 +103,12 @@ public class EventController {
         return eventService.findPublishedEventById(id, request);
     }
 
-    @GetMapping("/users/{userId}/events/{eventId}/requests")
+    @GetMapping(path+"/{eventId}/requests")
     public List<ParticipationRequestDto> findUserEventRequests(@PathVariable Long userId, @PathVariable Long eventId) {
         return eventService.findUserEventRequests(userId, eventId);
     }
 
-    @PatchMapping(value = "/users/{userId}/events/{eventId}/requests")
+    @PatchMapping(value = path+"/{eventId}/requests")
     public EventRequestStatusUpdateResult changeEventRequestsStatus(@PathVariable Long userId,
                                                                     @PathVariable Long eventId,
                                                                     @Valid @RequestBody EventRequestStatusUpdateRequest updateRequest) {

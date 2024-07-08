@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class StatisticViewDto {
 
-     String app;
-     String uri;
-     long hits;
+    String app;
+    String uri;
+    long hits;
 }

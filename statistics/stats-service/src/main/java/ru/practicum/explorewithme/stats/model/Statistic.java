@@ -17,10 +17,10 @@ public class Statistic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long id;
-     String app;
-     String uri;
-     String ip;
+    Long id;
+    String app;
+    String uri;
+    String ip;
     @Column(name = "timestamp_hit")
-     LocalDateTime timestamp;
+    LocalDateTime timestamp;
 }

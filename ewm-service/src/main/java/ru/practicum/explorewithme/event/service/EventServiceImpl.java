@@ -124,7 +124,11 @@ public class EventServiceImpl implements EventService {
             oldEvent.setIsPaid(eventUpdate.getPaid());
         }
         if (eventUpdate.getParticipantLimit() != null) {
-            oldEvent.setParticipantLimit(eventUpdate.getParticipantLimit());
+            if (eventUpdate.getParticipantLimit() < 0) {
+                throw new InvalidRequestException("Лимит участников не может быть меньше нуля");
+            } else {
+                oldEvent.setParticipantLimit(eventUpdate.getParticipantLimit());
+            }
         }
         if (eventUpdate.getRequestModeration() != null) {
             oldEvent.setRequestModeration(eventUpdate.getRequestModeration());

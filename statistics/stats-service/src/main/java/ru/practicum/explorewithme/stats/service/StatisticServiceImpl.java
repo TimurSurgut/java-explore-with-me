@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.explorewithme.StatisticInDto;
 import ru.practicum.explorewithme.StatisticViewDto;
+import ru.practicum.explorewithme.stats.constant.Constant;
 import ru.practicum.explorewithme.stats.exception.StatisticValidationException;
 import ru.practicum.explorewithme.stats.model.StatisticMapper;
 import ru.practicum.explorewithme.stats.repository.StatisticRepository;
-import ru.practicum.explorewithme.stats.constant.Constant;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -20,24 +20,24 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/admin/users")
 public class UserController {
-
+    private final String path = "/admin/users";
     private final UserService userService;
 
     //Admin endpoints
-    @GetMapping("/admin/users")
+    @GetMapping(path)
     public List<UserOutDto> findUsers(@RequestParam(required = false) List<Long> ids,
                                       @PositiveOrZero @RequestParam(required = false, defaultValue = "0") Integer from,
                                       @Positive @RequestParam(required = false, defaultValue = "10") Integer size) {
         return userService.findUsers(ids, from, size);
     }
 
-    @DeleteMapping(value = "/admin/users/{userId}")
+    @DeleteMapping(value = path+"/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@NotNull @PathVariable Long userId) {
         userService.deleteUser(userId);
     }
 
-    @PostMapping(value = "/admin/users")
+    @PostMapping(value = path)
     @ResponseStatus(HttpStatus.CREATED)
     public UserOutDto addUser(@Valid @RequestBody UserInDto inDto) {
         return userService.addUser(inDto);

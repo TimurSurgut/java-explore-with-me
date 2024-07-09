@@ -1,9 +1,7 @@
 package ru.practicum.explorewithme.category.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -12,9 +10,10 @@ import javax.validation.constraints.Size;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class NewCategoryDto {
 
     @NotBlank
     @Size(min = 1, max = 50, message = "Длина названия категории должна быть от 1 до 50")
-    private String name;
+    String name;
 }

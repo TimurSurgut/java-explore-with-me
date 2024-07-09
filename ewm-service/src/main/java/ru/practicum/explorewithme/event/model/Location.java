@@ -1,18 +1,14 @@
-package ru.practicum.explorewithme;
+package ru.practicum.explorewithme.event.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class StatisticViewDto {
-
-    String app;
-    String uri;
-    long hits;
+public class Location {
+    Float lat;
+    Float lon;
 }

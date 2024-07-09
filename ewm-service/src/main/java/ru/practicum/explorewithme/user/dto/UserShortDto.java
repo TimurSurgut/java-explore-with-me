@@ -1,4 +1,4 @@
-package ru.practicum.explorewithme;
+package ru.practicum.explorewithme.user.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,9 +10,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class StatisticViewDto {
+public class UserShortDto {
 
-    String app;
-    String uri;
-    long hits;
+    Long id;
+    String name;
 }

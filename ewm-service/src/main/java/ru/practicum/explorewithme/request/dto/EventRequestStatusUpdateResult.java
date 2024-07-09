@@ -1,4 +1,4 @@
-package ru.practicum.explorewithme;
+package ru.practicum.explorewithme.request.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -6,13 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class StatisticViewDto {
+public class EventRequestStatusUpdateResult {
 
-    String app;
-    String uri;
-    long hits;
+    List<ParticipationRequestDto> confirmedRequests;
+    List<ParticipationRequestDto> rejectedRequests;
 }

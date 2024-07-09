@@ -31,7 +31,7 @@ public class UserController {
         return userService.findUsers(ids, from, size);
     }
 
-    @DeleteMapping(value = path+"/{userId}")
+    @DeleteMapping(value = path + "/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@NotNull @PathVariable Long userId) {
         userService.deleteUser(userId);

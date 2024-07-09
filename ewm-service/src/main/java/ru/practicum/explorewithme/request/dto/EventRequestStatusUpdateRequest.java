@@ -6,8 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -18,6 +18,6 @@ public class EventRequestStatusUpdateRequest {
 
     @NotEmpty
     List<Long> requestIds;
-    @NotNull
+    @NotBlank
     String status;
 }

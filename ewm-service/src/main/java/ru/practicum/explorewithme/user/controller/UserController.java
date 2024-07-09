@@ -18,7 +18,6 @@ import java.util.List;
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/users")
 public class UserController {
     private final String path = "/admin/users";
     private final UserService userService;

@@ -1,9 +1,7 @@
 package ru.practicum.explorewithme.user.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
@@ -11,10 +9,11 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserWithFollowersDto {
 
-    private Long id;
-    private String email;
-    private String name;
-    private List<UserOutDto> followers;
+    Long id;
+    String email;
+    String name;
+    List<UserOutDto> followers;
 }

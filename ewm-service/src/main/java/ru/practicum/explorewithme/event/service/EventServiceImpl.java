@@ -96,7 +96,8 @@ public class EventServiceImpl implements EventService {
         Event oldEvent = findEventByIdAndInitiatorId(userId, eventId);
 
         if (oldEvent.getState().equals(EventState.PUBLISHED)) {
-            throw new DataConflictException("Изменить можно только отмененные события или события в состоянии " + "ожидания модерации");
+            throw new DataConflictException("Изменить можно только отмененные события или события в состоянии " +
+                    "ожидания модерации");
         }
         if (eventUpdate.getEventDate() != null) {
             LocalDateTime updateEventTime = LocalDateTime.parse(eventUpdate.getEventDate(), FORMATTER);
@@ -123,11 +124,7 @@ public class EventServiceImpl implements EventService {
             oldEvent.setIsPaid(eventUpdate.getPaid());
         }
         if (eventUpdate.getParticipantLimit() != null) {
-            if (eventUpdate.getParticipantLimit() < 0) {
-                throw new InvalidRequestException("Лимит участников не может быть меньше нуля");
-            } else {
-                oldEvent.setParticipantLimit(eventUpdate.getParticipantLimit());
-            }
+            oldEvent.setParticipantLimit(eventUpdate.getParticipantLimit());
         }
         if (eventUpdate.getRequestModeration() != null) {
             oldEvent.setRequestModeration(eventUpdate.getRequestModeration());
@@ -225,7 +222,8 @@ public class EventServiceImpl implements EventService {
                 predicates.add(criteriaBuilder.lessThan(root.get("eventDate"), eventAdminParam.getRangeEnd()));
             }
             return criteriaBuilder.and(predicates.toArray(Predicate[]::new));
-        });
+        }
+        );
         events = eventRepository.findAll(specification, pageable).getContent();
         views = eventStatService.getEventsViews(events.stream().map(Event::getId).collect(Collectors.toList()));
         log.info("Выполнен поиск событий для администратора");
@@ -238,13 +236,17 @@ public class EventServiceImpl implements EventService {
         List<Event> events;
         Map<Long, Long> views;
         sort = getEventSort(eventUserParam.getSort());
-        Pageable pageable = PageRequest.of(eventUserParam.getFrom() / eventUserParam.getSize(), eventUserParam.getSize(), sort);
+        Pageable pageable = PageRequest.of(eventUserParam.getFrom() / eventUserParam.getSize(),
+                eventUserParam.getSize(), sort);
         LocalDateTime checkedRangeStart = validateRangeTime(eventUserParam.getRangeStart(), eventUserParam.getRangeEnd());
         Specification<Event> specification = ((root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
             predicates.add(criteriaBuilder.equal(root.get("state"), EventState.PUBLISHED));
             if (eventUserParam.getText() != null) {
-                predicates.add(criteriaBuilder.or(criteriaBuilder.like(criteriaBuilder.lower(root.get("annotation")), "%" + eventUserParam.getText().toLowerCase() + "%"), criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%" + eventUserParam.getText().toLowerCase() + "%")));
+                predicates.add(criteriaBuilder.or(criteriaBuilder.like(criteriaBuilder.lower(root.get("annotation")),
+                                "%" + eventUserParam.getText().toLowerCase() + "%"),
+                        criteriaBuilder.like(criteriaBuilder.lower(root.get("description")),
+                                "%" + eventUserParam.getText().toLowerCase() + "%")));
             }
             if (eventUserParam.getCategories() != null) {
                 CriteriaBuilder.In<Long> categoriesClause = criteriaBuilder.in(root.get("category"));
@@ -264,7 +266,8 @@ public class EventServiceImpl implements EventService {
                 predicates.add(criteriaBuilder.lessThan(root.get("confirmedRequests"), root.get("participantLimit")));
             }
             return criteriaBuilder.and(predicates.toArray(Predicate[]::new));
-        });
+        }
+        );
         events = eventRepository.findAll(specification, pageable).getContent();
         views = eventStatService.getEventsViews(events.stream().map(Event::getId).collect(Collectors.toList()));
         log.info("Выполнен публичный поиск опубликованных событий");
@@ -274,7 +277,8 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventFullDto findPublishedEventById(Long eventId, HttpServletRequest request) {
         Map<Long, Long> views = eventStatService.getEventsViews(List.of(eventId));
-        Event event = eventRepository.findByIdAndState(eventId, EventState.PUBLISHED).orElseThrow(() -> new EventNotFoundException("Опубликованного события с указанным id не найдено"));
+        Event event = eventRepository.findByIdAndState(eventId, EventState.PUBLISHED)
+                .orElseThrow(() -> new EventNotFoundException("Опубликованного события с указанным id не найдено"));
         log.info("Выполнен публичный поиск опубликованного события с id {}", eventId);
         return EventMapper.toEventFullDtoWithViews(event, views);
     }
@@ -290,7 +294,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional
-    public EventRequestStatusUpdateResult changeEventRequestsStatus(Long userId, Long eventId, EventRequestStatusUpdateRequest statusUpdate) {
+    public EventRequestStatusUpdateResult changeEventRequestsStatus(Long userId, Long eventId,
+                                                                    EventRequestStatusUpdateRequest statusUpdate) {
         int requestsCount = statusUpdate.getRequestIds().size();
         User owner = userService.findUserById(userId);
         Event event = findEventById(eventId);
@@ -304,12 +309,14 @@ public class EventServiceImpl implements EventService {
         }
         for (Request request : requests) {
             if (!request.getStatus().equals(RequestStatus.PENDING)) {
-                throw new DataConflictException("Изменить статус можно только у ожидающей подтверждения заявки на " + "участие");
+                throw new DataConflictException("Изменить статус можно только у ожидающей подтверждения заявки на " +
+                        "участие");
             }
         }
         switch (status) {
             case CONFIRMED:
-                if (event.getParticipantLimit() == 0 || !event.getRequestModeration() || event.getParticipantLimit() > event.getConfirmedRequests() + requestsCount) {
+                if (event.getParticipantLimit() == 0 || !event.getRequestModeration()
+                        || event.getParticipantLimit() > event.getConfirmedRequests() + requestsCount) {
                     requests.forEach(request -> request.setStatus(RequestStatus.CONFIRMED));
                     event.setConfirmedRequests(event.getConfirmedRequests() + requestsCount);
                     confirmed.addAll(requests);
@@ -334,7 +341,8 @@ public class EventServiceImpl implements EventService {
         }
         eventRepository.save(event);
         requestRepository.saveAll(requests);
-        EventRequestStatusUpdateResult result = new EventRequestStatusUpdateResult(RequestMapper.toDtos(confirmed), RequestMapper.toDtos(rejected));
+        EventRequestStatusUpdateResult result = new EventRequestStatusUpdateResult(RequestMapper.toDtos(confirmed),
+                RequestMapper.toDtos(rejected));
         log.info("Обновлены статусы заявок у события с id {}. Статус {}", eventId, status);
         return result;
     }
@@ -342,6 +350,47 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<Event> findAllByIds(List<Long> ids) {
         return eventRepository.findAllByIdIn(ids);
+    }
+
+    @Override
+    public List<EventFullDto> findEventsBySubscriptionOfUser(Long userId, Long followerId, Integer from, Integer size) {
+        Map<Long, Long> views;
+        Pageable pageable = PageRequest.of(from / size, size);
+        if (userId.equals(followerId)) {
+            throw new DataConflictException("Пользователь не может быть подписан на себя");
+        }
+        User user = userService.findUserById(userId);
+        User follower = userService.findUserById(followerId);
+        if (!user.getFollowers().contains(follower)) {
+            throw new InvalidRequestException("Пользователь с id " + followerId + " не подписан на пользователя с id " +
+                    userId);
+        }
+        List<Event> events = eventRepository.findByInitiatorIdAndState(userId, EventState.PUBLISHED, pageable);
+        views = eventStatService.getEventsViews(events.stream().map(Event::getId).collect(Collectors.toList()));
+        log.info("Найдены события пользователя id {} для подписчика id {}", userId, followerId);
+        return EventMapper.toFullDtos(events, views);
+    }
+
+    @Override
+    public List<EventShortDto> findEventsByAllSubscriptions(Long followerId, String sort, Integer from, Integer size) {
+        Map<Long, Long> views;
+        Pageable pageable;
+        SubscriptionSort subSort = SubscriptionSort.valueOf(sort);
+        if (subSort == SubscriptionSort.NEW) {
+            pageable = PageRequest.of(from / size, size, Sort.by("eventDate").descending());
+        } else {
+            pageable = PageRequest.of(from / size, size, Sort.by("eventDate"));
+        }
+
+        User follower = userService.findUserById(followerId);
+        if (follower.getFollowees().isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<Long> folowees = follower.getFollowees().stream().map(User::getId).collect(Collectors.toList());
+        List<Event> events = eventRepository.findByStateAndInitiatorIdIn(EventState.PUBLISHED, folowees, pageable);
+        views = eventStatService.getEventsViews(events.stream().map(Event::getId).collect(Collectors.toList()));
+        log.info("Найдены события по подпискам пользователя с id {}", followerId);
+        return EventMapper.toShortDtos(events, views);
     }
 
     private Sort getEventSort(String eventSort) {
@@ -378,7 +427,8 @@ public class EventServiceImpl implements EventService {
 
     private void validateEventTimeByUser(LocalDateTime eventTime) {
         if (eventTime.isBefore(LocalDateTime.now().plusHours(2))) {
-            throw new InvalidRequestException("Дата и время на которые намечено событие не может быть " + "раньше, чем через два часа");
+            throw new InvalidRequestException("Дата и время на которые намечено событие не может быть " +
+                    "раньше, чем через два часа");
         }
     }
 
@@ -434,11 +484,14 @@ public class EventServiceImpl implements EventService {
     }
 
     private Event findEventById(Long eventId) {
-        return eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException("Событие с id " + eventId + " не найдено"));
+        return eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException("Событие с id "
+                + eventId + " не найдено"));
     }
 
     private Event findEventByIdAndInitiatorId(Long userId, Long eventId) {
-        return eventRepository.findByIdAndInitiatorId(eventId, userId).orElseThrow(() -> new EventNotFoundException("Событие с id " + eventId + " и id пользователя " + userId + " не найдено"));
+        return eventRepository.findByIdAndInitiatorId(eventId, userId)
+                .orElseThrow(() -> new EventNotFoundException("Событие с id " + eventId
+                        + " и id пользователя " + userId + " не найдено"));
     }
 
     private List<EventState> getEventStates(List<String> states) {
@@ -454,45 +507,4 @@ public class EventServiceImpl implements EventService {
         }
         return eventStates;
     }
-
-    @Override
-    public List<EventFullDto> findEventsBySubscriptionOfUser(Long userId, Long followerId, Integer from, Integer size) {
-        Map<Long, Long> views;
-        Pageable pageable = PageRequest.of(from / size, size);
-        if (userId.equals(followerId)) {
-            throw new DataConflictException("Пользователь не может быть подписан на себя");
-        }
-        User user = userService.findUserById(userId);
-        User follower = userService.findUserById(followerId);
-        if (!user.getFollowers().contains(follower)) {
-            throw new InvalidRequestException("Пользователь с id " + followerId + " не подписан на пользователя с id " + userId);
-        }
-        List<Event> events = eventRepository.findByInitiatorIdAndState(userId, EventState.PUBLISHED, pageable);
-        views = eventStatService.getEventsViews(events.stream().map(Event::getId).collect(Collectors.toList()));
-        log.info("Найдены события пользователя id {} для подписчика id {}", userId, followerId);
-        return EventMapper.toFullDtos(events, views);
-    }
-
-    @Override
-    public List<EventShortDto> findEventsByAllSubscriptions(Long followerId, String sort, Integer from, Integer size) {
-        Map<Long, Long> views;
-        Pageable pageable;
-        SubscriptionSort subSort = SubscriptionSort.valueOf(sort);
-        if (subSort == SubscriptionSort.NEW) {
-            pageable = PageRequest.of(from / size, size, Sort.by("eventDate").descending());
-        } else {
-            pageable = PageRequest.of(from / size, size, Sort.by("eventDate"));
-        }
-
-        User follower = userService.findUserById(followerId);
-        if (follower.getFollowees().isEmpty()) {
-            return new ArrayList<>();
-        }
-        List<Long> folowees = follower.getFollowees().stream().map(User::getId).collect(Collectors.toList());
-        List<Event> events = eventRepository.findByStateAndInitiatorIdIn(EventState.PUBLISHED, folowees, pageable);
-        views = eventStatService.getEventsViews(events.stream().map(Event::getId).collect(Collectors.toList()));
-        log.info("Найдены события по подпискам пользователя с id {}", followerId);
-        return EventMapper.toShortDtos(events, views);
-    }
-
 }

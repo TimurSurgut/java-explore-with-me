@@ -16,9 +16,9 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     Long id;
-     String email;
-     String name;
+    Long id;
+    String email;
+    String name;
     @ToString.Exclude
     @ManyToMany
     @JoinTable(name = "user_followers",
@@ -27,5 +27,5 @@ public class User {
     List<User> followers;
     @ToString.Exclude
     @ManyToMany(mappedBy = "followers")
-     List<User> followees;
+    List<User> followees;
 }

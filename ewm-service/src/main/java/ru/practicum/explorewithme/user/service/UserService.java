@@ -2,8 +2,8 @@ package ru.practicum.explorewithme.user.service;
 
 import ru.practicum.explorewithme.user.dto.UserInDto;
 import ru.practicum.explorewithme.user.dto.UserOutDto;
-import ru.practicum.explorewithme.user.model.User;
 import ru.practicum.explorewithme.user.dto.UserWithFollowersDto;
+import ru.practicum.explorewithme.user.model.User;
 
 import java.util.List;
 

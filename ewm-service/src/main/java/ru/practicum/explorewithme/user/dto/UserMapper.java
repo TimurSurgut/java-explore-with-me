@@ -16,11 +16,7 @@ public class UserMapper {
     }
 
     public static UserOutDto toUserOutDto(User user) {
-        return UserOutDto.builder()
-                .id(user.getId())
-                .name(user.getName())
-                .email(user.getEmail())
-                .build();
+        return UserOutDto.builder().id(user.getId()).name(user.getName()).email(user.getEmail()).build();
     }
 
     public static List<UserOutDto> toOutDtos(List<User> users) {
@@ -34,12 +30,8 @@ public class UserMapper {
     public static UserShortDto toUserShortDto(User user) {
         return new UserShortDto(user.getId(), user.getName());
     }
+
     public static UserWithFollowersDto toDtoWithFollowers(User user) {
-        return UserWithFollowersDto.builder()
-                .id(user.getId())
-                .name(user.getName())
-                .email(user.getEmail())
-                .followers(toOutDtos(user.getFollowers()))
-                .build();
+        return UserWithFollowersDto.builder().id(user.getId()).name(user.getName()).email(user.getEmail()).followers(toOutDtos(user.getFollowers())).build();
     }
 }
